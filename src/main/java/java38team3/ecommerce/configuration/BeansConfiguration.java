@@ -28,7 +28,7 @@ public class BeansConfiguration {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests(
-                        (authz) -> authz.antMatchers(HttpMethod.GET, "/api/users/").permitAll()
+                        (authz) -> authz.antMatchers(HttpMethod.GET, "/api/users").permitAll()
                 .antMatchers(HttpMethod.POST, "/api/users/**").authenticated()
 //                .antMatchers("/api/users/**").hasAuthority("ROLE_USER_ADMIN")
                         .anyRequest().permitAll() )
