@@ -1,5 +1,0 @@
-package java38team3.ecommerce.entities;
-
-public class Phones {
-
-}
