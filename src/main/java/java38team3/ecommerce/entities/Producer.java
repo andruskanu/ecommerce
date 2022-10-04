@@ -1,15 +1,21 @@
 package java38team3.ecommerce.entities;
 
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
+import lombok.Data;
+
+import javax.persistence.*;
 import java.util.List;
 
+@Entity
+@Data
 public class Producer {
-    @OneToMany
-    List<Product> products;
+    @Id
+    @GeneratedValue
+    private Long id;
 
-    @ManyToMany
-    List<ProductCategory> productCategories;
+    private String name;
+
+    @OneToMany(mappedBy = "producer")
+   private List<Product> products;
+
 
 }
