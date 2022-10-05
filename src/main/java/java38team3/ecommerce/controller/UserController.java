@@ -1,9 +1,12 @@
 package java38team3.ecommerce.controller;
 
 
+import java38team3.ecommerce.dto.UserDto;
 import java38team3.ecommerce.entities.UserEntity;
 import java38team3.ecommerce.repository.UserRepository;
+import java38team3.ecommerce.services.UserService;
 import lombok.AllArgsConstructor;
+import org.apache.catalina.User;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,7 +17,9 @@ import java.util.List;
 @AllArgsConstructor
 public class UserController {
 
-    private UserRepository userRepository;
+    private final UserRepository userRepository;
+
+    private final UserService userService;
 
     @GetMapping
     public List<UserEntity> getAllUsers() {
@@ -26,9 +31,14 @@ public class UserController {
         return userRepository.getById(id);
     }
 
-    @PostMapping
-    public UserEntity createUser(@RequestBody UserEntity request) {
-        return userRepository.save(request);
+//    @PostMapping()
+//    public UserDto createUser(@RequestBody UserDto request) {
+//        return userRepository.save(request);
+//    }
+    @PostMapping("/register")
+    public UserDto createUser(@RequestBody UserDto userDto) {
+        UserDto newUserDto = userService.registerUser(userDto);
+        return newUserDto;
     }
 
     @PutMapping("/{userId}")

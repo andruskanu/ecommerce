@@ -24,14 +24,33 @@ public class BeansConfiguration {
         return NoOpPasswordEncoder.getInstance();
     }
 
+//    @Bean
+//    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+//        http
+//                .authorizeRequests(
+//                        (authz) -> authz.antMatchers(HttpMethod.GET, "/api/users").permitAll()
+//                .antMatchers(HttpMethod.POST, "/api/users/**").authenticated()
+////                .antMatchers("/api/users/**").hasAuthority("ROLE_USER_ADMIN")
+//                        .anyRequest().permitAll() )
+//                .formLogin().and()
+//                .httpBasic().and()
+//                .logout()
+//                .and()
+//                .csrf().ignoringAntMatchers("/api/**")
+//                .and()
+//                .headers().frameOptions().disable()
+//        ;
+//        return http.build();
+//    }
+
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests(
-                        (authz) -> authz.antMatchers(HttpMethod.GET, "/api/users").permitAll()
-                .antMatchers(HttpMethod.POST, "/api/users/**").authenticated()
-//                .antMatchers("/api/users/**").hasAuthority("ROLE_USER_ADMIN")
-                        .anyRequest().permitAll() )
+                        (authz) -> authz.antMatchers("/api/users/**").permitAll()
+
+////                .antMatchers("/api/users/**").hasAuthority("ROLE_USER_ADMIN")
+                                .anyRequest().permitAll() )
                 .formLogin().and()
                 .httpBasic().and()
                 .logout()
