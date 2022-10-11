@@ -31,11 +31,8 @@ public class UserController {
         return userRepository.getById(id);
     }
 
-//    @PostMapping()
-//    public UserDto createUser(@RequestBody UserDto request) {
-//        return userRepository.save(request);
-//    }
-    @PostMapping("/register")
+
+    @PostMapping()
     public UserDto createUser(@RequestBody UserDto userDto) {
         UserDto newUserDto = userService.registerUser(userDto);
         return newUserDto;
