@@ -1,13 +1,14 @@
 package java38team3.ecommerce.controller;
 
 
+import java38team3.ecommerce.dto.RegisterDto;
 import java38team3.ecommerce.dto.UserDto;
 import java38team3.ecommerce.entities.UserEntity;
 import java38team3.ecommerce.repository.UserRepository;
 import java38team3.ecommerce.services.UserService;
 import lombok.AllArgsConstructor;
-import org.apache.catalina.User;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -21,13 +22,18 @@ public class UserController {
 
     private final UserService userService;
 
+//    @PostMapping
+//    public ResponseEntity<UserDto> register(@RequestBody RegisterDto registerDto) {
+//
+//    }
+
     @GetMapping
     public List<UserEntity> getAllUsers() {
         return userRepository.findAll();
     }
 
     @GetMapping("/{userId}")
-    public UserEntity getUSer(@PathVariable("userId") Long id){
+    public UserEntity getUser(@PathVariable("userId") Long id){
         return userRepository.getById(id);
     }
 

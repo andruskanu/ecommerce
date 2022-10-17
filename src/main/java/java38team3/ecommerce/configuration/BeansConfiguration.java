@@ -27,9 +27,14 @@ public class BeansConfiguration {
 //    dXNlcjpwYXNz
     // "Authorization": "Basic dXNlcjpwYXNz"
 
+//    @Bean
+////    public PasswordEncoder noOpPasswordEncoder(){
+////        return NoOpPasswordEncoder.getInstance();
+////    }
+
     @Bean
-    public PasswordEncoder noOpPasswordEncoder(){
-        return NoOpPasswordEncoder.getInstance();
+    public BCryptPasswordEncoder bCryptPasswordEncoder() {
+        return new BCryptPasswordEncoder();
     }
 
 //    @Bean
@@ -53,7 +58,7 @@ public class BeansConfiguration {
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        http
+        http.csrf().disable().cors().and()
                 .authorizeRequests(
                         (authz) -> authz.antMatchers("/api/users/**").permitAll()
 
@@ -63,8 +68,8 @@ public class BeansConfiguration {
                 .httpBasic().and()
                 .logout()
                 .and()
-                .csrf().ignoringAntMatchers("/api/**")
-                .and()
+//                .csrf().ignoringAntMatchers("/api/**")
+//                .and()
                 .headers().frameOptions().disable()
         ;
         return http.build();
@@ -80,7 +85,7 @@ public class BeansConfiguration {
                 "Accept", "Jwt-Token", "Authorization", "Origin, Accept", "X-Requested-With",
                 "Access-Control-Request-Method", "Access-Control-Request-Headers"));
         corsConfiguration.setExposedHeaders(Arrays.asList("Origin", "Content-Type", "Accept", "Jwt-Token", "Authorization",
-                "Access-Control-Allow-Origin", "Access-Control-Allow-Origin", "Access-ConXtrol-Allow-Credentials"));
+                "Access-Control-Allow-Origin", "Access-Control-Allow-Origin", "Access-Control-Allow-Credentials"));
         corsConfiguration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         urlBasedCorsConfigurationSource.registerCorsConfiguration("/**", corsConfiguration);
         return new CorsFilter(urlBasedCorsConfigurationSource);
